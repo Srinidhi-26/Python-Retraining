@@ -1,14 +1,16 @@
-class task:
-    id = 1
-    taskname=""
-    description=""
-    priority=""
+class Task:
+    def __init__(self, task_id, name, description, priority):
+        self.task_id = task_id
+        self.name = name
+        self.description = description
+        self.priority = priority
 
-def __init__(self,id,taskname,description,priority):
-    self.id=id
-    self.taskname=taskname
-    self.description=description
-    self.priority=priority
+    def __str__(self):
+        return f"{self.task_id} :  {self.name}  {self.description}  {self.priority}"
 
-def check(self,id):
-    self.id=id
+class TaskManager:
+    def __init__(self):
+        self.tasks = {}
+
+
+tasks = TaskManager()
