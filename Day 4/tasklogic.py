@@ -1,26 +1,25 @@
-d1={}
-def present(id):
-    if id in d1.keys():
-        print()
-        return "Present, value =", d1[id]
-    else:
-        return "Not present\n"
-    
-def addTask(x):
-    if x.id in d1:
-        return "This id already present",1
-    else:
-        d1[x.id]={x.taskname,x.description,x.priority}
-        return d1
-    
-def updateTask(x):
-    if x.id not in d1:
-        return "This id is not present",1
-    else:d1[x.id]={x.taskname,x.description,x.priority}
-    return d1
+from task import Task
+from task import tasks
 
-def viewTask(id):
-    return d1[id]
+def updatetask(task_id, name, desc, pri):
+    task = tasks.tasks.get(task_id)
+    task.name = name
+    task.description = desc
+    task.priority = pri
+    return
 
-def removeTask(id):
-    return "Removed",d1.pop(id)
+def addtask(task_id, name, desc, pri):
+    task = Task(task_id, name, desc, pri)
+    tasks.tasks[task_id] = task
+    return task
+
+def viewtask(task_id):
+    task = tasks.tasks.get(task_id)
+    return task
+
+def viewalltasks():
+    return (f"{task_id} : {task.name}  {task.description}  {task.priority} " for task_id, task in
+            tasks.tasks.items())
+
+def removetask(task_id):
+    del tasks.tasks[task_id]
