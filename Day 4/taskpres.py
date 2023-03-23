@@ -1,39 +1,41 @@
-from tasklogic import addTask,present,updateTask,viewTask,removeTask 
-from task import task
-def pres(): 
+from task import Task, TaskManager, tasks
+from tasklogic import updatetask, addtask, viewtask, viewalltasks, removetask
+def pres():
     exit = False
     while not exit:
-        print("0.Exit\n1. Enter Task ID")
-        ch= int(input("Enter U r Choice: "))
-        if ch==0:
-             exit=True
-             if ch==1: 
-                 id=int(input("Enter the Task ID: "))
-                 res=present(id)
-                 print(res)
-                 print("0. Go back to menu\n1. Add task information\n2. update task information\n3. view Task information\n4. Remove Task Information")
-                 ch=int(input("Enter u r Option: "))
-             if ch==1:
-                 id=int(input("Enter the id: "))
-                 nam=input("Enter the Task name: ") 
-                 des=input("Enter the description: ")
-                 pri=int(input("Value the priority: "))
-                 x=task(id,nam,des,pri)
-                 res=addTask(x)
-                 print(res,"\n")
-             if ch==2:
-                id=int(input("Enter the id: "))
-                nam=input("Enter the Task name to update: ") 
-                des=input("Enter the description to update: ")
-                pri=int(input("Value the priority to update: "))
-                x=task(id,nam,des,pri)
-                res=updateTask(x)
-                print(res,"\n")
-             if ch==3:
-                id=int(input("Enter the Task id to view the information: "))
-                res=viewTask(id)
-                print(res,"\n")
-             if ch==4:
-                id=int(input("Enter the Task id to remove: "))
-                res=removeTask(id)
-                print(res,"\n")
+        print("1. Enter Task ID\n2. View All Tasks\n0. Exit")
+        ch = int(input("Enter your choice: "))
+        if ch == 1:
+            task_id = int(input("Enter Task ID: "))
+            if task_id in tasks.tasks:
+                print("1. Update Task\n2. View Task\n3. Remove Task\n0. Main Menu")
+                ch = int(input("Enter Your Choice: "))
+                if ch == 1:
+                    name = input("Enter Task Name: ")
+                    desc = input("Enter Description: ")
+                    pri = int(input("Enter Priority: "))
+                    updatetask(task_id, name,desc,pri)
+                    print("Task Updated Successfully")
+                if ch == 2:
+                    result = viewtask(task_id)
+                    print(result)
+
+                if ch == 3:
+                    result =removetask(task_id)
+                    print(result)
+                if ch == 0:
+                    pres()
+            else:
+                name = input("Enter Task Name: ")
+                desc = input("Enter Description: ")
+                pri = int(input("Enter Priority: "))
+                result = addtask(task_id, name, desc, pri)
+                print(result)
+
+        elif ch == 2:
+            for task in viewalltasks():
+                print(task)
+        elif ch == 0:
+            exit = True
+        else:
+            print("Invalid Choice")
